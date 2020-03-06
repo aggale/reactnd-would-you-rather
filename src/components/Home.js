@@ -5,7 +5,7 @@ class Home extends Component {
   render() {
     console.log(this.props);
     const { questionIds } = this.props;
-
+    console.log(this.props);
     return (
       <div>
         <ul>
