@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Question from "./Question";
 
 class Home extends Component {
   render() {
@@ -10,7 +11,9 @@ class Home extends Component {
       <div>
         <ul>
           {questionIds.map(id => (
-            <li key={id}>{id}</li>
+            <li key={id}>
+              <Question id={id} />
+            </li>
           ))}
         </ul>
       </div>

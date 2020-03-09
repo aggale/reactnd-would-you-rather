@@ -12,7 +12,7 @@ export function handleInitialData() {
       return _getUsers().then(users => {
         dispatch(receiveUsers(users));
         dispatch(receiveAuthedUser("tylermcginnis")); // TODO: add OAUTH
-        dispatch(hideLoading);
+        dispatch(hideLoading());
       });
     });
   };
