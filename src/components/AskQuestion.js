@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { handleAnswerQuestion } from "../actions/questions";
 
 class AskQuestion extends Component {
   state = {
@@ -14,7 +15,10 @@ class AskQuestion extends Component {
   answerQuestion = e => {
     e.preventDefault();
 
-    console.log("Answered: ", this.state.selectedAnswer);
+    const { dispatch, question, authedUser } = this.props;
+
+    dispatch(handleAnswerQuestion(question.id, this.state.selectedAnswer));
+    // TODO: Redirect to results
   };
 
   render() {

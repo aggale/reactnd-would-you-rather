@@ -1,21 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Question from "./Question";
+import styled from "styled-components";
+import QuestionSummary from "./QuestionSummary";
 
 class Home extends Component {
   render() {
-    console.log(this.props);
     const { questionIds } = this.props;
-    console.log(this.props);
+
+    const List = styled.ul`
+      list-style-type: none;
+    `;
+
     return (
       <div>
-        <ul>
+        <List>
           {questionIds.map(id => (
             <li key={id}>
-              <Question id={id} />
+              <QuestionSummary id={id} />
             </li>
           ))}
-        </ul>
+        </List>
       </div>
     );
   }
