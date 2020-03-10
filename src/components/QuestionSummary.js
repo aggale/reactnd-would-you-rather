@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -15,31 +16,37 @@ class QuestionSummary extends Component {
       width: 100px;
       height: 100px;
     `;
-    console.log("sum");
+
     return (
       <div>
         {user && (
-          <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="center"
-            spacing={5}
-          >
-            <Grid item>
-              <p>{user.name} asks:</p>
-              <Image src={user.avatarURL} alt={user.name} />
+          <div>
+            <Typography variant="h5" component="h1">
+              {`Asked by ${user.name}`}
+            </Typography>
+            <Grid
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="center"
+              spacing={5}
+            >
+              <Grid item>
+                <Image src={user.avatarURL} alt={user.name} />
+              </Grid>
+              <Grid item>
+                <Typography variant="h5" component="h1">
+                  Would you rather...
+                </Typography>
+                <p>{`...${question.optionOne.text} or ${question.optionTwo.text}`}</p>
+                <Link to={`/questions/${question.id}`}>
+                  <Button variant="contained" color="primary">
+                    View Poll
+                  </Button>
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant="h5" component="h1">
-                Would you rather...
-              </Typography>
-              <p>{`...${question.optionOne.text} or ${question.optionTwo.text}`}</p>
-              <Button variant="contained" color="primary">
-                View Poll
-              </Button>
-            </Grid>
-          </Grid>
+          </div>
         )}
       </div>
     );

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Grid from "@material-ui/core/Grid";
 import QuestionSummary from "./QuestionSummary";
 
 class Home extends Component {
@@ -12,14 +13,17 @@ class Home extends Component {
     `;
 
     return (
-      <div>
-        <List>
+      <div style={{ padding: 20 }}>
+        <Grid
+          container
+          direction="column"
+          justify="flex-start"
+          alignItems="flex-start"
+        >
           {questionIds.map(id => (
-            <li key={id}>
-              <QuestionSummary id={id} />
-            </li>
+            <QuestionSummary id={id} />
           ))}
-        </List>
+        </Grid>
       </div>
     );
   }
