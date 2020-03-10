@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from "react";
 import "../App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./Home.js";
-import Question from "./Question.js";
+import Home from "./Home";
+import Question from "./Question";
+import NewQuestion from "./NewQuestion";
 import LoadingBar from "react-redux-loading";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
@@ -22,6 +23,7 @@ class App extends Component {
               <div>
                 <Route path="/" exact component={Home} />
                 <Route path="/questions/:question_id" component={Question} />
+                <Route path="/new" component={NewQuestion} />
               </div>
             )}
           </div>
