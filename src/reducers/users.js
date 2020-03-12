@@ -8,7 +8,6 @@ export default function users(state = {}, action) {
         ...action.users
       };
     case ANSWER_QUESTION:
-      const questions = state[action.authedUser]["questions"];
       return {
         ...state,
         [action.authedUser]: {

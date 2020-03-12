@@ -1,9 +1,5 @@
 import { showLoading, hideLoading } from "react-redux-loading";
-import {
-  _saveQuestionAnswer,
-  _saveQuestion,
-  formatQuestion
-} from "../_DATA.js";
+import { _saveQuestionAnswer, _saveQuestion } from "../_DATA.js";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ANSWER_QUESTION = "ANSWER_QUESTION";

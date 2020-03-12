@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleAddQuestion } from "../actions/questions";
-import styled from "styled-components";
-import { Grid, Typography } from "@material-ui/core";
 
 class NewQuestion extends Component {
   state = {

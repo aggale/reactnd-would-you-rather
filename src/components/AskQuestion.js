@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
 import { handleAnswerQuestion } from "../actions/questions";
 
 class AskQuestion extends Component {
@@ -15,14 +14,14 @@ class AskQuestion extends Component {
   answerQuestion = e => {
     e.preventDefault();
 
-    const { dispatch, question, authedUser } = this.props;
+    const { dispatch, question } = this.props;
 
     dispatch(handleAnswerQuestion(question.id, this.state.selectedAnswer));
     // TODO: Redirect to results
   };
 
   render() {
-    const { question, authedUser } = this.props;
+    const { question } = this.props;
     const OPTION_ONE = "optionOne",
       OPTION_TWO = "optionTwo";
 
@@ -60,10 +59,9 @@ class AskQuestion extends Component {
   }
 }
 
-function mapStateToProps({ questions, authedUser }, { id }) {
+function mapStateToProps({ questions }, { id }) {
   return {
-    question: questions[id],
-    authedUser
+    question: questions[id]
   };
 }
 

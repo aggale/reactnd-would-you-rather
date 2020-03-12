@@ -29,7 +29,7 @@ class NavBar extends Component {
             </NavLink>
           </NavListItem>
           <NavListItem>
-            <NavLink to="/new" activeClassName="active">
+            <NavLink to="/add" activeClassName="active">
               New Tweet
             </NavLink>
           </NavListItem>
