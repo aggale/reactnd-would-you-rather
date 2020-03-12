@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Grid, Typography } from "@material-ui/core";
 import AskQuestion from "./AskQuestion";
 import QuestionResults from "./QuestionResults";
 
@@ -20,7 +21,7 @@ class Question extends Component {
     `;
     const CenteredContainer = styled.div`
       margin: auto;
-      width: 50%;
+      width: 75%;
       padding: 10px;
     `;
 
@@ -28,17 +29,27 @@ class Question extends Component {
       <div>
         {user && (
           <CenteredContainer>
-            <p>Asked by {user.name}</p>
-            <div className="question-asker-info">
-              <Image src={user.avatarURL} alt={user.name} />
-            </div>
-            <div>
-              {answered ? (
-                <QuestionResults id={question.id} />
-              ) : (
-                <AskQuestion id={question.id} />
-              )}
-            </div>
+            <Grid
+              container
+              direction="row"
+              justify="space-evenly"
+              alignItems="center"
+            >
+              <Grid item>
+                <Typography align="center" paragraph="true">
+                  Asked by {user.name}
+                </Typography>
+                <Image src={user.avatarURL} alt={user.name} />
+              </Grid>
+
+              <Grid item>
+                {answered ? (
+                  <QuestionResults id={question.id} />
+                ) : (
+                  <AskQuestion id={question.id} />
+                )}
+              </Grid>
+            </Grid>
           </CenteredContainer>
         )}
       </div>

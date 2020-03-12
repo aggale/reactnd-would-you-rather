@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleAddQuestion } from "../actions/questions";
+import styled from "styled-components";
+import { Grid, Typography } from "@material-ui/core";
 
 class NewQuestion extends Component {
   state = {
@@ -11,6 +13,7 @@ class NewQuestion extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { dispatch, authedUser } = this.props;
+    console.log("authedUser:", authedUser);
     dispatch(
       handleAddQuestion(authedUser, this.state.optionOne, this.state.optionTwo)
     );

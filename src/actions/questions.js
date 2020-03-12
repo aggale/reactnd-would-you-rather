@@ -37,22 +37,23 @@ export function handleAnswerQuestion(questionId, answer) {
   };
 }
 
-function addQuestion(question) {
+function addQuestion(question, authedUser) {
   return {
     type: ADD_QUESTION,
-    question
+    question,
+    authedUser
   };
 }
 
 export function handleAddQuestion(authedUser, optionOneText, optionTwoText) {
   return dispatch => {
-    console.log({ optionOneText, optionTwoText, author: authedUser });
     dispatch(showLoading());
 
     return _saveQuestion({ optionOneText, optionTwoText, author: authedUser })
       .then(formattedQuestion => {
-        dispatch(addQuestion(formattedQuestion));
+        dispatch(addQuestion(formattedQuestion, authedUser));
       })
+
       .then(() => dispatch(hideLoading()));
   };
 }

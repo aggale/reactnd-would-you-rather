@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./Home";
 import Question from "./Question";
 import NewQuestion from "./NewQuestion";
+import LeaderBoard from "./LeaderBoard";
 import LoadingBar from "react-redux-loading";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
+import { Container } from "@material-ui/core";
 
 class App extends Component {
   componentDidMount() {
@@ -18,15 +20,16 @@ class App extends Component {
       <Router>
         <Fragment>
           <LoadingBar />
-          <div className="container">
+          <Container maxWidth="md">
             {this.props.loading ? null : (
               <div>
                 <Route path="/" exact component={Home} />
                 <Route path="/questions/:question_id" component={Question} />
                 <Route path="/new" component={NewQuestion} />
+                <Route path="/leaderboard" component={LeaderBoard} />
               </div>
             )}
-          </div>
+          </Container>
         </Fragment>
       </Router>
     );

@@ -17,8 +17,12 @@ class QuestionSummary extends Component {
       height: 100px;
     `;
 
+    const PaddedContainer = styled.div`
+      padding-bottom: 20px;
+    `;
+
     return (
-      <div>
+      <PaddedContainer>
         {user && (
           <div>
             <Typography variant="h5" component="h1">
@@ -48,7 +52,7 @@ class QuestionSummary extends Component {
             </Grid>
           </div>
         )}
-      </div>
+      </PaddedContainer>
     );
   }
 }
