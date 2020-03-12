@@ -5,6 +5,7 @@ import Home from "./Home";
 import Question from "./Question";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
+import NavBar from "./NavBar";
 import LoadingBar from "react-redux-loading";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
@@ -21,6 +22,8 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <Container maxWidth="md">
+            <NavBar />
+
             {this.props.loading ? null : (
               <div>
                 <Route path="/" exact component={Home} />
