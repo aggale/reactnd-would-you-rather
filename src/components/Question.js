@@ -8,10 +8,18 @@ import QuestionResults from "./QuestionResults";
 class Question extends Component {
   render() {
     const { question, user, authedUser } = this.props;
+
+    if (!authedUser) {
+      return <p>Log in to view this page</p>;
+    }
+
+    if (!question) {
+      return <p> 404 - poll does not exist</p>;
+    }
+
     const answered =
       question.optionOne.votes.includes(authedUser) ||
       question.optionTwo.votes.includes(authedUser);
-    console.log(question.optionTwo.votes);
 
     // Styled components
     const Image = styled.img`
@@ -36,7 +44,7 @@ class Question extends Component {
               alignItems="center"
             >
               <Grid item>
-                <Typography align="center" paragraph="true">
+                <Typography align="center" paragraph>
                   Asked by {user.name}
                 </Typography>
                 <Image src={user.avatarURL} alt={user.name} />

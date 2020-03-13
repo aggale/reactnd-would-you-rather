@@ -5,25 +5,36 @@ import UserStats from "./UserStats";
 
 class LeaderBoard extends Component {
   render() {
-    const { users } = this.props;
-    return (
+    const { users, authedUser } = this.props;
+    return authedUser ? (
       <Grid>
-        {Object.values(users).map(user => (
-          <UserStats
-            avatarURL={user.avatarURL}
-            name={user.name}
-            answered={Object.keys(user.answers).length}
-            created={user.questions.length}
-          />
-        ))}
+        {users
+          .sort((a, b) => b.answered + b.created - (a.answered + a.created))
+          .map(user => (
+            <Grid item key={user.name}>
+              <UserStats
+                avatarURL={user.avatarURL}
+                name={user.name}
+                answered={user.answered}
+                created={user.created}
+              />
+            </Grid>
+          ))}
       </Grid>
+    ) : (
+      <p>Log in to view this page</p>
     );
   }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
   return {
-    users
+    users: Object.values(users).map(user => ({
+      ...user,
+      answered: Object.keys(user.answers).length,
+      created: user.questions.length
+    })),
+    authedUser
   };
 }
 

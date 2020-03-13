@@ -13,7 +13,7 @@ class ResultDisplay extends Component {
 
     return (
       <PaddedContainer>
-        <p>
+        <div>
           <span>
             {yourVote && (
               <Typography color="textSecondary" display="inline">
@@ -24,7 +24,7 @@ class ResultDisplay extends Component {
           <Typography align="center">
             Would you rather {questionText}?
           </Typography>
-        </p>
+        </div>
         <p>{`${percentage}% (${votesFor} out of ${totalVotes} votes)`}</p>
       </PaddedContainer>
     );

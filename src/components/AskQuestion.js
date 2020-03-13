@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleAnswerQuestion } from "../actions/questions";
+import { Typography } from "@material-ui/core/";
 
 class AskQuestion extends Component {
   state = {
@@ -27,6 +28,9 @@ class AskQuestion extends Component {
 
     return question ? (
       <div>
+        <Typography variant="h5" component="h1">
+          Would you rather...
+        </Typography>
         <form onSubmit={this.answerQuestion}>
           <input
             type="radio"

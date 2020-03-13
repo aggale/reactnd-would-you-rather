@@ -33,7 +33,7 @@ class QuestionSummary extends Component {
               alignItems="center"
               spacing={5}
             >
-              <Grid item>
+              <Grid item key>
                 <Image src={user.avatarURL} alt={user.name} />
               </Grid>
               <Grid item>
@@ -58,7 +58,6 @@ class QuestionSummary extends Component {
 function mapStateToProps({ users, questions }, { id }) {
   const question = questions[id];
   const user = question ? users[question.author] : null;
-  console.log(question);
 
   return {
     question,

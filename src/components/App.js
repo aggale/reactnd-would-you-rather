@@ -6,6 +6,7 @@ import Question from "./Question";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
 import NavBar from "./NavBar";
+import Login from "./Login";
 import LoadingBar from "react-redux-loading";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
@@ -22,14 +23,16 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <Container maxWidth="md">
-            <NavBar />
-
-            {this.props.loading ? null : (
+            {!this.props.loading && (
               <div>
-                <Route path="/" exact component={Home} />
-                <Route path="/questions/:question_id" component={Question} />
-                <Route path="/add" component={NewQuestion} />
-                <Route path="/leaderboard" component={LeaderBoard} />
+                <NavBar />
+                <div>
+                  <Route path="/" exact component={Home} />
+                  <Route path="/questions/:question_id" component={Question} />
+                  <Route path="/add" component={NewQuestion} />
+                  <Route path="/leaderboard" component={LeaderBoard} />
+                  <Route path="/login" component={Login} />
+                </div>
               </div>
             )}
           </Container>
@@ -39,9 +42,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ questions }) {
   return {
-    loading: authedUser === null
+    loading: Object.keys(questions).length === 0
   };
 }
 

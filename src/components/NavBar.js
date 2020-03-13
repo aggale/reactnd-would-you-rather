@@ -2,9 +2,14 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
+import { logoutAuthedUser } from "../actions/authedUser";
+import { Button, Typography } from "@material-ui/core/";
 
 class NavBar extends Component {
-  //
+  handleLogout = () => {
+    this.props.dispatch(logoutAuthedUser());
+  };
+
   render() {
     const { authedUser } = this.props;
 
@@ -25,20 +30,35 @@ class NavBar extends Component {
         <NavList>
           <NavListItem>
             <NavLink to="/" exact activeClassName="active">
-              Home
+              <Button>Home</Button>
             </NavLink>
           </NavListItem>
           <NavListItem>
             <NavLink to="/add" activeClassName="active">
-              New Tweet
+              <Button>Create Question</Button>
             </NavLink>
           </NavListItem>
           <NavListItem>
             <NavLink to="/leaderboard" activeClassName="active">
-              Leader Board
+              <Button>Leader Board</Button>
             </NavLink>
           </NavListItem>
-          <NavListItem>Hello, {authedUser}</NavListItem>
+          {authedUser && (
+            <NavListItem>
+              <Typography>Hello, {authedUser}</Typography>
+            </NavListItem>
+          )}
+          {authedUser ? (
+            <NavListItem>
+              <Button onClick={this.handleLogout}>Logout</Button>
+            </NavListItem>
+          ) : (
+            <NavListItem>
+              <NavLink to="/login" activeClassName="active">
+                <Button>Login</Button>
+              </NavLink>
+            </NavListItem>
+          )}
         </NavList>
       </nav>
     );

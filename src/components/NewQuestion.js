@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { handleAddQuestion } from "../actions/questions";
+import { Redirect } from "react-router-dom";
 
 class NewQuestion extends Component {
   state = {
     optionOne: "",
-    optionTwo: ""
+    optionTwo: "",
+    toHome: false
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const { dispatch, authedUser } = this.props;
-    console.log("authedUser:", authedUser);
     dispatch(
       handleAddQuestion(authedUser, this.state.optionOne, this.state.optionTwo)
     );
-    this.props.history.push("/");
+    this.setState({ toHome: true });
   };
 
   handleInputChange = e => {
@@ -23,7 +24,11 @@ class NewQuestion extends Component {
   };
 
   render() {
-    return (
+    if (this.state.toHome) {
+      return <Redirect to="/" />;
+    }
+
+    return this.props.authedUser ? (
       <div>
         <h1>Create New Question</h1>
         <p>Complete the question:</p>
@@ -47,6 +52,8 @@ class NewQuestion extends Component {
           <button type="submit">Submit</button>
         </form>
       </div>
+    ) : (
+      <p>Log in to view this page</p>
     );
   }
 }
