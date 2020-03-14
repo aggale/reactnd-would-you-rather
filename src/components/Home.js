@@ -5,24 +5,20 @@ import QuestionSummary from "./QuestionSummary";
 
 class Home extends Component {
   state = {
-    questions: []
+    type: "unanswered"
   };
 
   handleListChange = e => {
     const { questionIds, user } = this.props;
     this.setState({
-      questions: filterList(e.currentTarget.value, questionIds, user)
+      type: e.currentTarget.value
     });
   };
 
-  static getDerivedStateFromProps(props) {
-    const { questionIds, user } = props;
-    return {
-      questions: filterList("unanswered", questionIds, user)
-    };
-  }
-
   render() {
+    const { questionIds, user } = this.props;
+    const questions = filterList(this.state.type, questionIds, user);
+
     return (
       <div style={{ padding: 20 }}>
         <Grid
@@ -48,7 +44,7 @@ class Home extends Component {
           justify="flex-start"
           alignItems="flex-start"
         >
-          {this.state.questions.map(id => (
+          {questions.map(id => (
             <Grid item key={id}>
               <QuestionSummary id={id} />
             </Grid>
