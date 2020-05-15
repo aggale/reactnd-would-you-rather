@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { logoutAuthedUser } from "../actions/authedUser";
-import { Button, Typography } from "@material-ui/core/";
+import { Button, Typography, AppBar, Toolbar } from "@material-ui/core/";
 
 class NavBar extends Component {
   handleLogout = () => {
@@ -26,41 +26,45 @@ class NavBar extends Component {
     `;
 
     return (
-      <nav className="nav">
-        <NavList>
-          <NavListItem>
-            <NavLink to="/" exact activeClassName="active">
-              <Button>Home</Button>
-            </NavLink>
-          </NavListItem>
-          <NavListItem>
-            <NavLink to="/add" activeClassName="active">
-              <Button>Create Question</Button>
-            </NavLink>
-          </NavListItem>
-          <NavListItem>
-            <NavLink to="/leaderboard" activeClassName="active">
-              <Button>Leader Board</Button>
-            </NavLink>
-          </NavListItem>
-          {authedUser && (
-            <NavListItem>
-              <Typography>Hello, {authedUser}</Typography>
-            </NavListItem>
-          )}
-          {authedUser ? (
-            <NavListItem>
-              <Button onClick={this.handleLogout}>Logout</Button>
-            </NavListItem>
-          ) : (
-            <NavListItem>
-              <NavLink to="/login" activeClassName="active">
-                <Button>Login</Button>
-              </NavLink>
-            </NavListItem>
-          )}
-        </NavList>
-      </nav>
+      <AppBar>
+        <Toolbar>
+          <nav className="nav">
+            <NavList>
+              <NavListItem>
+                <NavLink to="/" exact activeClassName="active">
+                  <Button>Home</Button>
+                </NavLink>
+              </NavListItem>
+              <NavListItem>
+                <NavLink to="/add" activeClassName="active">
+                  <Button>Create Question</Button>
+                </NavLink>
+              </NavListItem>
+              <NavListItem>
+                <NavLink to="/leaderboard" activeClassName="active">
+                  <Button>Leader Board</Button>
+                </NavLink>
+              </NavListItem>
+              {authedUser && (
+                <NavListItem>
+                  <Typography>Hello, {authedUser}</Typography>
+                </NavListItem>
+              )}
+              {authedUser ? (
+                <NavListItem>
+                  <Button onClick={this.handleLogout}>Logout</Button>
+                </NavListItem>
+              ) : (
+                <NavListItem>
+                  <NavLink to="/login" activeClassName="active">
+                    <Button>Login</Button>
+                  </NavLink>
+                </NavListItem>
+              )}
+            </NavList>
+          </nav>
+        </Toolbar>
+      </AppBar>
     );
   }
 }

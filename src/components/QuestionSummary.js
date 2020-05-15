@@ -56,6 +56,7 @@ class QuestionSummary extends Component {
 }
 
 function mapStateToProps({ users, questions }, { id }) {
+  console.log("users: ", users);
   const question = questions[id];
   const user = question ? users[question.author] : null;
 
