@@ -5,39 +5,16 @@ import { Provider } from "react-redux";
 import { render } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import "@testing-library/jest-dom/extend-expect";
-import QuestionSummary from "../QuestionSummary";
+import NewQuestion from "../NewQuestion";
 
 // Props
-let id, question, user;
 const mockStore = configureStore([]); // Pass empty list of middleware
 let store;
 
 beforeAll(() => {
-  // Fake data
-  user = {
-    name: "ewoinxz"
-  };
-
-  id = "8xf0y6ziyjabvozdd253nd";
-  question = {
-    id,
-    author: user.name,
-    optionOne: {
-      text: "djslkfajlk"
-    },
-    optionTwo: {
-      text: "cxgdfzn"
-    }
-  };
-
   // Initialize store
   store = mockStore({
-    questions: {
-      [id]: question
-    },
-    users: {
-      [user.name]: user
-    }
+    authedUser: "jeffff"
   });
 });
 
@@ -46,34 +23,36 @@ test("renders without crashing", () => {
   render(
     <Provider store={store}>
       <BrowserRouter>
-        <QuestionSummary id={id} />
+        <NewQuestion />
       </BrowserRouter>
     </Provider>
   );
 });
 
-test("shows asker's name", () => {
+test("shows message if no one is logged in", () => {
+  // Create store with no authedUser
+  const emptyStore = mockStore({ authedUser: null });
+
   const { getByText } = render(
-    <Provider store={store}>
+    <Provider store={emptyStore}>
       <BrowserRouter>
-        <QuestionSummary id={id} />
+        <NewQuestion />
       </BrowserRouter>
     </Provider>
   );
 
-  expect(getByText(`Asked by ${user.name}`)).toBeInTheDocument();
+  expect(getByText("Log in to view this page")).toBeInTheDocument();
 });
 
-test("shows question text", () => {
+test("shows title and question lead-in", () => {
   const { getByText } = render(
     <Provider store={store}>
       <BrowserRouter>
-        <QuestionSummary id={id} />
+        <NewQuestion />
       </BrowserRouter>
     </Provider>
   );
 
-  expect(
-    getByText(`...${question.optionOne.text} or ${question.optionTwo.text}`)
-  ).toBeInTheDocument();
+  expect(getByText("Create New Question")).toBeInTheDocument();
+  expect(getByText("Would you rather...")).toBeInTheDocument();
 });

@@ -31,8 +31,8 @@ function mapStateToProps({ users, authedUser }) {
   return {
     users: Object.values(users).map(user => ({
       ...user,
-      answered: Object.keys(user.answers).length,
-      created: user.questions.length
+      answered: user.answers ? Object.keys(user.answers).length : 0,
+      created: user.questions ? user.questions.length : 0
     })),
     authedUser
   };

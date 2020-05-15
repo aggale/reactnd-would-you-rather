@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { render } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import "@testing-library/jest-dom/extend-expect";
-import QuestionSummary from "../QuestionSummary";
+import LeaderBoard from "../LeaderBoard";
 
 // Props
 let id, question, user;
@@ -14,14 +14,14 @@ let store;
 
 beforeAll(() => {
   // Fake data
+  id = "8xf0y6ziyjabvozdd253nd";
+
   user = {
     name: "ewoinxz"
   };
 
-  id = "8xf0y6ziyjabvozdd253nd";
   question = {
     id,
-    author: user.name,
     optionOne: {
       text: "djslkfajlk"
     },
@@ -37,7 +37,8 @@ beforeAll(() => {
     },
     users: {
       [user.name]: user
-    }
+    },
+    authedUser: user.name
   });
 });
 
@@ -46,34 +47,23 @@ test("renders without crashing", () => {
   render(
     <Provider store={store}>
       <BrowserRouter>
-        <QuestionSummary id={id} />
+        <LeaderBoard />
       </BrowserRouter>
     </Provider>
   );
 });
 
-test("shows asker's name", () => {
+test("shows message if no one is logged in", () => {
+  // Create store with no authedUser
+  const emptyStore = mockStore({ users: {}, authedUser: null });
+
   const { getByText } = render(
-    <Provider store={store}>
+    <Provider store={emptyStore}>
       <BrowserRouter>
-        <QuestionSummary id={id} />
+        <LeaderBoard />
       </BrowserRouter>
     </Provider>
   );
 
-  expect(getByText(`Asked by ${user.name}`)).toBeInTheDocument();
-});
-
-test("shows question text", () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <BrowserRouter>
-        <QuestionSummary id={id} />
-      </BrowserRouter>
-    </Provider>
-  );
-
-  expect(
-    getByText(`...${question.optionOne.text} or ${question.optionTwo.text}`)
-  ).toBeInTheDocument();
+  expect(getByText("Log in to view this page")).toBeInTheDocument();
 });

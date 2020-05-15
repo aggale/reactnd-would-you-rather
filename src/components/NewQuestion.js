@@ -77,7 +77,7 @@ class NewQuestion extends Component {
                   variant="contained"
                   type="submit"
                   color="primary"
-                  fullwidth
+                  fullwidth="true"
                   style={{ marginTop: 20 }}
                 >
                   Submit
